@@ -1,6 +1,6 @@
 package by.itac.mylibrary.dao;
 
-import by.itac.mylibrary.controller.impl.LibraryInitialization;
+import by.itac.mylibrary.dao.impl.LibraryInitialization;
 import by.itac.mylibrary.dao.impl.FileCRUDBookDAO;
 import by.itac.mylibrary.dao.impl.FileFindBookDAO;
 

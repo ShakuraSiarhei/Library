@@ -4,7 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
-import by.itac.mylibrary.controller.impl.LibraryInitialization;
+import by.itac.mylibrary.dao.impl.LibraryInitialization;
 import by.itac.mylibrary.dao.CRUDBookDAO;
 import by.itac.mylibrary.dao.DAOProvider;
 import by.itac.mylibrary.dao.exception.DAOException;
