@@ -1,5 +1,6 @@
 package by.itac.mylibrary.dao;
 
+import by.itac.mylibrary.controller.impl.LibraryInitialization;
 import by.itac.mylibrary.dao.impl.FileCRUDBookDAO;
 import by.itac.mylibrary.dao.impl.FileFindBookDAO;
 
@@ -8,7 +9,8 @@ public final class DAOProvider {
 	
 	private CRUDBookDAO bookDAO = new FileCRUDBookDAO();
 	private FindBookDAO findDAO = new FileFindBookDAO();
-	
+	private LibraryInitialization libraryInitialized = new LibraryInitialization ();
+ 	
 	
 	public CRUDBookDAO getBookDAO() {
 		return bookDAO;
@@ -17,6 +19,10 @@ public final class DAOProvider {
 
 	public FindBookDAO getFindDAO() {
 		return findDAO;
+	}
+	
+	public LibraryInitialization getLibraryInitialized () {
+		return libraryInitialized;
 	}
 
 

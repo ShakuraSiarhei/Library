@@ -9,17 +9,19 @@ import by.itac.mylibrary.service.exception.ServiceException;
 public class AddBook implements Command {
 
 	public String execute(String request) {
+		ServiceProvider service = ServiceProvider.getInstance();
+		BookService bookService = service.getBookService();
+		String response = null;
+		String[] bookInfo = request.split("__");
+		Book book = new Book (Long.parseLong(bookInfo[0]), bookInfo[2], bookInfo[4], Integer.parseInt(bookInfo[6]), bookInfo[8]);
 		
 		try {
-			ServiceProvider service = ServiceProvider.getInstance();
-			BookService bookService = service.getBookService();
-			String[] bookInfo = request.split("__");
-			Book book = new Book (Long.parseLong(bookInfo[0]), bookInfo[2], bookInfo[4], Integer.parseInt(bookInfo[6]), bookInfo[8]);
 			bookService.save(book);
-			return "Книга успешно сохранена.";
+			response = "Книга успешно сохранена.";
 		} catch (ServiceException e) {
-			return "При сохранениии книги возникла ошибка.";
+			response = "При сохранениии книги возникла ошибка.";
 		}
+		return response;
 	}
 
 }

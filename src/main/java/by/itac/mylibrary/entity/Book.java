@@ -1,6 +1,10 @@
 package by.itac.mylibrary.entity;
 
-public class Book {
+import java.io.Serializable;
+
+public class Book implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	
 	private long id;
 	private String title;
@@ -10,13 +14,16 @@ public class Book {
 	
 	public Book () {}
 	
-	public Book(long id, String title, String author, int yearOfWriting, String status) {
-		super();
-		this.id = id;
+	public Book(String title, String author, int yearOfWriting, String status) {
 		this.title = title;
 		this.author = author;
 		this.yearOfWriting = yearOfWriting;
 		this.status = status;
+	}
+	
+	public Book(long id, String title, String author, int yearOfWriting, String status) {
+		this (title, author, yearOfWriting, status);
+		this.id = id;
 	}
 
 	public long getId() {

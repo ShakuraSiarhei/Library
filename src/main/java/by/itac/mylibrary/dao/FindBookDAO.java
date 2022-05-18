@@ -7,7 +7,7 @@ import by.itac.mylibrary.entity.Book;
 
 public interface FindBookDAO {
 	
-	Book find(int id) throws DAOException;
+	Book findByID(long id) throws DAOException;
 	List<Book> findByTitle(String title) throws DAOException;
 	List<Book> findByAuthor(String author) throws DAOException;
 }

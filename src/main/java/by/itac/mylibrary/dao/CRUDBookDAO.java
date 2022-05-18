@@ -10,6 +10,6 @@ public interface CRUDBookDAO {
 	void delete(Book book) throws DAOException;
 	void delete(int id) throws DAOException;
 	
-	void updateStatus(int id, int newStatus) throws DAOException;
+	void updateStatus(int id, String newStatus) throws DAOException;
 	
 }
