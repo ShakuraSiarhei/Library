@@ -1,7 +1,7 @@
 package by.itac.mylibrary.dao.impl;
 
 import java.io.BufferedReader;
-import java.io.File;
+import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -13,10 +13,10 @@ import by.itac.mylibrary.entity.Book;
 
 public final class LibraryInitialization {
 	
+	private static final String FILE_NAME = "db-home-library.txt"; 	
+	private String libraryAdress = getClass().getClassLoader().getResource(FILE_NAME).getFile();
 	private final List<Book> library = new ArrayList<Book>();;
 	private boolean isActual = false;
-	private String libraryAdress = "db-home-library.txt";
-
 	
 	public List<Book> getLibrary() throws DAOException {
 		if (isActual) {
@@ -43,8 +43,7 @@ public final class LibraryInitialization {
 
 	private void readLibraryFromFile() throws DAOException {
 		
-		try (FileReader fr = new FileReader(libraryAdress)) {
-			BufferedReader read = new BufferedReader(fr);
+		try (BufferedReader read = new BufferedReader(new FileReader(libraryAdress))) { 
 			String line = read.readLine();
 			
 			while (line != null) {
@@ -62,7 +61,7 @@ public final class LibraryInitialization {
 				line = read.readLine();
 			}
 		} catch (IOException e) {
-			throw new DAOException();
+			throw new DAOException(e);
 		}
 		 
 	}
@@ -70,18 +69,27 @@ public final class LibraryInitialization {
 	public void writeLibraryToFile() throws DAOException {
 				
 		try {
-			FileWriter writer = new FileWriter(libraryAdress, false); 
+			BufferedWriter writer = new BufferedWriter(new FileWriter(libraryAdress, false));
 			for (Book b : library ) {
+				String delimetr = "__ __";
 				StringBuilder textToDataBase;
-				textToDataBase = new StringBuilder(b.getId() + "__ " + "__" + b.getTitle() + "__ " + "__" + b.getAuthor() + "__ "
-					+ "__" + b.getYearOfWriting() + "__ " + "__" + b.getStatus());		
-				writer.write(textToDataBase.toString());
+				textToDataBase = new StringBuilder();
+				textToDataBase.append(b.getId());
+				textToDataBase.append(delimetr);
+				textToDataBase.append(b.getTitle());
+				textToDataBase.append(delimetr);
+				textToDataBase.append(b.getAuthor());
+				textToDataBase.append(delimetr);
+				textToDataBase.append(b.getYearOfWriting());
+				textToDataBase.append(delimetr);
+				textToDataBase.append(b.getStatus());	
+				writer.append(textToDataBase.toString());
 				writer.append('\n');
 			}
-			writer.close();
+			//writer.close();
 			isActual = true;
 		} catch (IOException e) {
-			throw new DAOException();
+			throw new DAOException(e);
 		}
 	}
 }

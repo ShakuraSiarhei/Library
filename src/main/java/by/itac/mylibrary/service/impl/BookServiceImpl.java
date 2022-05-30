@@ -20,7 +20,7 @@ public class BookServiceImpl implements BookService {
 			CRUDBookDAO bookDAO = dao.getBookDAO();
 			bookDAO.save(book);
 		} catch (DAOException e) {
-			throw new ServiceException(); 
+			throw new ServiceException(e); 
 		}
 		
 	}
@@ -35,7 +35,7 @@ public class BookServiceImpl implements BookService {
 			FindBookDAO findBook = dao.getFindDAO();
 			response = findBook.findByID(id);
 		} catch (DAOException e) {
-			throw new ServiceException();
+			throw new ServiceException(e);
 		}
 		return response;
 	}
@@ -50,7 +50,7 @@ public class BookServiceImpl implements BookService {
 			FindBookDAO findBook = dao.getFindDAO();
 			response = findBook.findByTitle(title);
 		} catch (DAOException e) {
-			throw new ServiceException();
+			throw new ServiceException(e);
 		}
 		return response;
 	}
@@ -65,7 +65,7 @@ public class BookServiceImpl implements BookService {
 			FindBookDAO findBook = dao.getFindDAO();
 			response = findBook.findByAuthor(author);
 		} catch (DAOException e) {
-			throw new ServiceException();
+			throw new ServiceException(e);
 		}
 		return response;
 	}

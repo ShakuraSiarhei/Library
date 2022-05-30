@@ -1,5 +1,6 @@
 package by.itac.mylibrary.dao.impl;
 
+import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
@@ -17,19 +18,28 @@ public class FileCRUDBookDAO implements CRUDBookDAO {
 	
 		DAOProvider dao = DAOProvider.getInstance();
 		LibraryInitialization libraryInitialization = dao.getLibraryInitialized();
-	
+
 		StringBuilder textToDataBase;
-		textToDataBase = new StringBuilder(book.getId() + "__ " + "__" + book.getTitle() + "__ " + "__" + book.getAuthor() + "__ "
-		+ "__" + book.getYearOfWriting() + "__ " + "__" + book.getStatus());		
+		String delimetr = "__ __";
+		textToDataBase = new StringBuilder();
+		textToDataBase.append(book.getId());
+		textToDataBase.append(delimetr);
+		textToDataBase.append(book.getTitle());
+		textToDataBase.append(delimetr);
+		textToDataBase.append(book.getAuthor());
+		textToDataBase.append(delimetr);
+		textToDataBase.append(book.getYearOfWriting());
+		textToDataBase.append(delimetr);
+		textToDataBase.append(book.getStatus());		
 		
 		try {
-			FileWriter writer = new FileWriter(libraryInitialization.getLibraryAdress(), true); 
-			writer.write(textToDataBase.toString());
-			writer.append('\n');
-			writer.close();
+			BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(libraryInitialization.getLibraryAdress(), true));
+			bufferedWriter.append(textToDataBase.toString());
+			bufferedWriter.append('\n');
+			bufferedWriter.close();
 			libraryInitialization.setActual(false);
 		} catch (IOException e) {
-			throw new DAOException();
+			throw new DAOException(e);
 		}
 	}
 

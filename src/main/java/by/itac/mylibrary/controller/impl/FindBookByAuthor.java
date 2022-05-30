@@ -25,7 +25,11 @@ public class FindBookByAuthor implements Command {
 				response = "Книги этого автора отсутствуют в библиотеке.";
 			} else {
 				for (Book b : book) {
-				response = response + b.toString() + '\n';
+					if (response == null) {
+						response = b.toString() + '\n';
+					} else {
+						response = response + b.toString() + '\n';
+					}
 				}
 			}
 		} catch (ServiceException e) {
